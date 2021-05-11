@@ -1,0 +1,82 @@
+"content": {
+"animation": {
+"duration": 2,
+"width": 220,
+"height": 120,
+"fileName": "animation.gif.mp4",
+"mimeType": "video/mp4",
+"hasStickers": false,
+"minithumbnail": {
+"width": 40,
+"height": 22,
+"data": "/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDACgcHiMeGSgjISMtKygwPGRBPDc3PHtYXUlkkYCZlo+AjIqgtObDoKrarYqMyP/L2u71////m8H////6/+b9//j/2wBDASstLTw1PHZBQXb4pYyl+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj4+Pj/wAARCAAWACgDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwCs+6GPPmKSe2KdZKJZNhyQMkgHGaqrAWP31P41esICJ1YN69vapSbRV0mEbeVdbE4jIPGc1Z35BrPk81GaRem4g5HShLkqcSdCOoFJxe5SlHYtrIiSlnOBgdveiqryjy9/O3OM4opK4OxHCdgDY+8fXtV+1bDMF7RFhRRWy2MvtEcao1lKSOS3BP4VUZVLICOOaKKX2Q+0SXR8yFVUBQAMCiiipjsXLc//2Q==",
+"constructor": -328540758
+},
+"thumbnail": {
+"format": {
+"constructor": -653503352
+},
+"width": 220,
+"height": 119,
+"file": {
+"id": 546,
+"size": 8801,
+"expectedSize": 8801,
+"local": {
+"path": "",
+"canBeDownloaded": true,
+"canBeDeleted": false,
+"isDownloadingActive": false,
+"isDownloadingCompleted": false,
+"downloadOffset": 0,
+"downloadedPrefixSize": 0,
+"downloadedSize": 0,
+"constructor": -1166400317
+},
+"remote": {
+"id": "AAMCAgADGQEAAQVwe2CRRma9RzLgvgABPTPIhr5ehcYnuwAC4wsAAnE5iEgGdsZXaZVmrsqWSQ4ABAEAB20AA7JhAAIeBA",
+"uniqueId": "AQADypZJDgAEsmEAAg",
+"isUploadingActive": false,
+"isUploadingCompleted": true,
+"uploadedSize": 8801,
+"constructor": -1822143022
+},
+"constructor": 766337656
+},
+"constructor": 1243275371
+},
+"animation": {
+"id": 547,
+"size": 28801,
+"expectedSize": 28801,
+"local": {
+"path": "",
+"canBeDownloaded": true,
+"canBeDeleted": false,
+"isDownloadingActive": false,
+"isDownloadingCompleted": false,
+"downloadOffset": 0,
+"downloadedPrefixSize": 0,
+"downloadedSize": 0,
+"constructor": -1166400317
+},
+"remote": {
+"id": "CgACAgIAAxkBAAEFcHtgkUZmvUcy4L4AAT0zyIa-XoXGJ7sAAuMLAAJxOYhIBnbGV2mVZq4eBA",
+"uniqueId": "AgAD4wsAAnE5iEg",
+"isUploadingActive": false,
+"isUploadingCompleted": true,
+"uploadedSize": 28801,
+"constructor": -1822143022
+},
+"constructor": 766337656
+},
+"constructor": -872359106
+},
+"caption": {
+"text": "",
+"entities": [],
+"constructor": -252624564
+},
+"isSecret": false,
+"constructor": 1306939396
+},
