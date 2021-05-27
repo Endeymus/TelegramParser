@@ -1,5 +1,6 @@
 package com.endeymus.parser.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,10 +16,12 @@ import javax.persistence.*;
 public class MonitoringSettings {
 
     @Id
+    @JsonIgnore
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name = "id_monitoring")
     private Monitoring idMonitoring;

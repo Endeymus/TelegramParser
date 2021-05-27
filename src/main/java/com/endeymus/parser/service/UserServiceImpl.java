@@ -23,10 +23,17 @@ public class UserServiceImpl implements UserService {
     @PersistenceContext
     private EntityManager em;
 
+
+
     @Override
     @Transactional(readOnly = true)
     public List<User> findAll() {
         return userRepository.findAll();
+    }
+
+    @Override
+    public User findByLogin(String login) {
+        return userRepository.findByLogin(login);
     }
 
     @Override
@@ -58,5 +65,10 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllWithDetails() {
         return em.createNamedQuery(User.SQL_FIND_ALL_WITH_DETAILS, User.class)
                 .getResultList();
+    }
+
+    @Override
+    public User findByHashKey(int hashKey) {
+        return userRepository.findByHashKey(hashKey);
     }
 }

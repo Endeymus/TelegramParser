@@ -35,7 +35,7 @@ public class PostsServiceImpl implements PostsService {
     @Override
     @Transactional(readOnly = true)
     public List<Posts> findByChannel(Channel channel) {
-        throw new NotYetImplementedException("findByChannel()");
+        return postsRepository.findByIdChannel(channel);
     }
 
     @Override

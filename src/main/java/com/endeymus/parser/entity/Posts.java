@@ -1,5 +1,6 @@
 package com.endeymus.parser.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,10 +20,7 @@ import java.util.Date;
         query = "select p from Posts p " +
                 "where p.idInternal = :id"),
         @NamedQuery(name = Posts.FIND_LAST_TOP_POSTS_BY_CHANNEL_ID,
-        query = "select p from Posts p " +
-                "left join fetch p.idChannel " +
-                "where p.idChannel.id = :id_channel " +
-                "order by p.id desc")
+        query = "select p from Posts p where p.idChannel.idInternal = :id_channel order by p.date desc")
 
 })
 public class Posts {
@@ -33,6 +31,7 @@ public class Posts {
     @Column(name = "id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_channel")
     private Channel idChannel;
@@ -48,17 +47,22 @@ public class Posts {
     @Column(name = "content")
     private String content;
 
+    @JsonIgnore
+    @Transient
     private String shortContent;
 
     @Column(name = "media")
     private byte[] media;
 
+    @JsonIgnore
     @Column(name = "reference")
     private String reference;
 
+    @JsonIgnore
     @Column(name = "reference_other_channel")
     private String referenceOtherChannel;
 
+    @JsonIgnore
     @Column(name = "id_internal")
     private Long idInternal;
 

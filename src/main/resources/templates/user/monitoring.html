@@ -1,54 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="blocks/head :: head"></head>
+<head th:replace="blocks/head :: head2"></head>
 <body>
-<nav th:replace="blocks/header :: header"></nav>
+<!--  Start Header  -->
+<header th:replace="blocks/header"></header>
+<!--  End Header  -->
 <br>
-<div class="container">
-    <form class="form-floating" th:method="POST" th:action="@{/monitoring/upload/{id}(id=1)}" enctype="multipart/form-data">
-        <div class="input-group mb-3">
-            <input name="file" type="file" class="form-control" id="inputGroupFile02">
-            <button type="submit" class="btn btn-outline-primary">Загрузить</button>
-        </div>
-    </form>
-
-
-    <button type="button" class="btn btn-outline-success me-md-2 mx-auto mb-3" th:onclick="add()">
-        <i class="bi bi-plus">Добавить новый чат</i>
-    </button>
-    <button type="button" class="btn btn-outline-danger me-md-2 mx-auto mb-3" th:onclick="del()">
-        <i class="bi bi-file-minus">Удалить последений чат</i>
-    </button>
-
-
-    <form class="form-floating" th:method="POST" th:action="@{/monitoring/}">
-        <div th:if="${not #lists.isEmpty(chats)}" th:each="chat, iter : ${chats}" class="input-group mb-3">
-            <span class="input-group-text" th:id="basic-addon + ${iter.index}">@</span>
-            <input th:name="chat" th:value="${chat.getIdChannel().getName()}" type="text" class="form-control" placeholder="chat name" aria-label="chat name" aria-describedby="basic-addon1">
-            <div class="form-check ms-3 my-auto">
-                <input class="form-check-input" onchange="checkBox(this)" name="checkbox" th:if="${chat.getSettings().isNeedAnalytic()}" type="checkbox" value="true" th:id="flexCheckIndeterminate + ${iter.index}" checked>
-                <input class="form-check-input" onchange="checkBox(this)" name="checkbox" th:if="${not chat.getSettings().isNeedAnalytic()}" type="checkbox" value="false" th:id="flexCheckIndeterminate + ${iter.index}">
-                <label class="form-check-label" th:for="flexCheckIndeterminate + ${iter.index}">
-                    Вкл. аналитику
-                </label>
+<main>
+    <div class="container">
+        <form class="form-floating" th:method="POST" th:action="@{/monitoring/upload/}" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                <input name="file" type="file" class="form-control" id="inputGroupFile02">
+                <button type="submit" class="btn btn-outline-primary">Загрузить</button>
             </div>
-        </div>
-        <div th:if="${#lists.isEmpty(chats)}" class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">@</span>
-            <input th:name="chat" type="text" class="form-control" placeholder="chat name" aria-label="chat name" aria-describedby="basic-addon1">
-            <div class="form-check ms-3 my-auto">
-                <input class="form-check-input" name="checkbox" onchange="checkBox(this)" type="checkbox" value="false" id="flexCheckIndeterminate1">
-                <label class="form-check-label" for="flexCheckIndeterminate1">
-                    Вкл. аналитику
-                </label>
+        </form>
+
+
+        <button type="button" class="btn btn-outline-success me-md-2 mx-auto mb-3" th:onclick="add()">
+            <i class="bi bi-plus">Добавить новый чат</i>
+        </button>
+        <button type="button" class="btn btn-outline-danger me-md-2 mx-auto mb-3" th:onclick="del()">
+            <i class="bi bi-file-minus">Удалить последений чат</i>
+        </button>
+
+
+        <form class="form-floating" th:method="POST" th:action="@{/monitoring/}">
+            <div class="input-content-chat">
+                <div th:if="${not #lists.isEmpty(chats)}" th:each="chat, iter : ${chats}" class="input-group mb-3">
+                    <span class="input-group-text" th:id="basic-addon + ${iter.index}">@</span>
+                    <input th:name="chat" th:value="${chat.getIdChannel().getName()}" type="text" class="form-control" placeholder="chat name" aria-label="chat name" aria-describedby="basic-addon1">
+                </div>
+                <div th:if="${#lists.isEmpty(chats)}" class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">@</span>
+                    <input th:name="chat" type="text" class="form-control" placeholder="chat name" aria-label="chat name" aria-describedby="basic-addon1">
+                </div>
             </div>
-        </div>
 
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <button class="btn btn-primary me-md-2" type="submit">Сохранить</button>
-        </div>
-    </form>
-</div>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button class="btn btn-primary me-md-2" type="submit">Сохранить</button>
+            </div>
+        </form>
+    </div>
+</main>
 
+<script th:replace="blocks/scripts"></script>
 </body>
 </html>

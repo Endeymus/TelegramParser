@@ -1,36 +1,186 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Страница авторизации</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link rel="stylesheet" type="text/css" media="all" href="../../static/css/form.css" th:href="@{/css/form.css}">
+    <!-- Title -->
+    <title th:text="${title}"></title>
+
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Leckerli+One">
+
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/bootstrap/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-line/css/simple-line-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-etlinefont/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-line-pro/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-hs/style.css}">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/hamburgers/hamburgers.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/slick-carousel/slick/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/cubeportfolio-full/cubeportfolio/css/cubeportfolio.min.css}">
+
+    <!-- CSS Template -->
+    <link rel="stylesheet" th:href="@{assets/css/styles.op-spa.css}">
+
+    <!-- CSS Customization -->
+    <link rel="stylesheet" th:href="@{/assets/css/custom.css}">
+
 </head>
 <body>
-<div class="registration">
-    <form th:method="POST" th:action="@{/registration}">
-        <div class="container_reg">
-            <h1>Регистрация</h1>
-<!--            <p>Пожалуйста, введите логин и пароль, чтобы войти</p>-->
-            <hr>
+<!--  Start Header  -->
+<header th:replace="blocks/header"></header>
+<!--  End Header  -->
 
-            <label for="name"><b>name</b></label>
-            <input type="text" placeholder="Введите имя" id="name" name="name" required>
+<main>
+    <!-- Login - Heading -->
+    <div class="g-max-width-645 text-center g-pt-100 mx-auto g-mb-80">
+        <h1 class="mb-0">Добро пожаловать!</h1>
+    </div>
+    <!-- End Login - Heading -->
 
-            <label for="email"><b>email</b></label>
-            <input type="text" placeholder="Введите почтовый адрес" id="email" name="email" required>
+    <!-- Login -->
+    <div class="container g-pb-30">
+        <div class="row justify-content-center">
+            <div class="col-md-6 col-lg-4 text-center g-mb-70">
+                <h2 class="h5 mb-4">Создай свой аккаунт</h2>
 
-            <label for="password"><b>Пароль</b></label>
-            <input type="password" placeholder="Введите пароль" id="password" name="password" required>
+                <!-- Login Form -->
+                <form class="g-mb-30" method="post" action="/registration" th:object="${user}">
+                    <div class="g-mb-20">
+                        <input th:field="*{name}" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded-0 g-py-13 g-px-15" type="text" placeholder="Введите ФИО" >
+                        <kpm-button class="_1mUok1yqu_fHkbNOXVoU6l kpm_input-field-button kpm_gray-key-icon" style="z-index: 3 !important;"><div class="_12GLdmNfqjBzgAQBymfRrk"  style="width: 20px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><svg class="_1jZ1QRhwRIXZDO2Rgp_qon" viewBox="25 25 50 50" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" style="inset: 0px -2px !important;"><circle cx="50" cy="50" r="20"></circle></svg></div><svg class="_2WQbmZpFI_2_k72D9o87Hq kpm_reset _2p2h7gYS-bpObPoQxR7lvo" width="12" height="24" viewBox="0 0 8 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 12px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7.46487C7.1956 6.77325 8 5.48056 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 5.48056 0.804397 6.77325 2 7.46487V9H3V10H2V12H3V13H2V14.5L4 16L6 14.5V7.46487ZM5 3C5 3.55228 4.55229 4 4 4C3.44772 4 3 3.55228 3 3C3 2.44772 3.44772 2 4 2C4.55229 2 5 2.44772 5 3ZM4 8H5V14H4V8Z"></path></svg></kpm-button></div>
 
-            <label for="success_password"><b>Пароль</b></label>
-            <input type="password" placeholder="Введите подтверждение пароля" id="success_password" name="success_password" required>
+                    <div class="g-mb-20">
+                        <input th:field="*{login}" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded-0 g-py-13 g-px-15" type="text" placeholder="Введите свой логин">
+                        <kpm-button class="_1mUok1yqu_fHkbNOXVoU6l kpm_input-field-button kpm_gray-key-icon" style="z-index: 3 !important;"><div class="_12GLdmNfqjBzgAQBymfRrk" style="width: 20px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><svg class="_1jZ1QRhwRIXZDO2Rgp_qon" viewBox="25 25 50 50" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" style="inset: 0px -2px !important;"><circle cx="50" cy="50" r="20"></circle></svg></div><svg class="_2WQbmZpFI_2_k72D9o87Hq kpm_reset _2p2h7gYS-bpObPoQxR7lvo" width="12" height="24" viewBox="0 0 8 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 12px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7.46487C7.1956 6.77325 8 5.48056 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 5.48056 0.804397 6.77325 2 7.46487V9H3V10H2V12H3V13H2V14.5L4 16L6 14.5V7.46487ZM5 3C5 3.55228 4.55229 4 4 4C3.44772 4 3 3.55228 3 3C3 2.44772 3.44772 2 4 2C4.55229 2 5 2.44772 5 3ZM4 8H5V14H4V8Z"></path></svg></kpm-button></div>
 
-            <hr>
+                    <div class="g-mb-20">
+                        <input th:field="*{password}" class="form-control g-color-black g-bg-white g-bg-white--focus g-brd-gray-light-v3 g-brd-primary--hover rounded-0 g-py-13 g-px-15" type="password" placeholder="Введите свой пароль" >
+                        <kpm-button class="_1mUok1yqu_fHkbNOXVoU6l kpm_input-field-button kpm_gray-key-icon" style="z-index: 3 !important;"><div class="_12GLdmNfqjBzgAQBymfRrk"  style="width: 20px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><svg class="_1jZ1QRhwRIXZDO2Rgp_qon" viewBox="25 25 50 50" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" style="inset: 0px -2px !important;"><circle cx="50" cy="50" r="20"></circle></svg></div><svg class="_2WQbmZpFI_2_k72D9o87Hq kpm_reset _2p2h7gYS-bpObPoQxR7lvo" width="12" height="24" viewBox="0 0 8 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 12px !important; height: 24px !important; top: -36.4688px !important; left: 142.5px !important;"><path fill-rule="evenodd" clip-rule="evenodd" d="M6 7.46487C7.1956 6.77325 8 5.48056 8 4C8 1.79086 6.20914 0 4 0C1.79086 0 0 1.79086 0 4C0 5.48056 0.804397 6.77325 2 7.46487V9H3V10H2V12H3V13H2V14.5L4 16L6 14.5V7.46487ZM5 3C5 3.55228 4.55229 4 4 4C3.44772 4 3 3.55228 3 3C3 2.44772 3.44772 2 4 2C4.55229 2 5 2.44772 5 3ZM4 8H5V14H4V8Z"></path></svg></kpm-button></div>
 
+                    <button class="btn btn-block u-btn-primary g-color-white g-bg-primary-dark-v1--hover g-font-weight-600 g-font-size-12 text-uppercase rounded-0 g-px-25 g-py-15" type="submit" >Зарегистрироваться</button>
+                </form>
+                <!-- End Login Form -->
 
-            <button type="submit" class="registerbtn">Зарегистрироваться</button>
+                <a class="d-block g-mb-10" href="/login">Уже есть аккаунт? Войти</a>
+            </div>
+
+            <div class="col-md-6 col-lg-5 ml-lg-5 g-mb-70">
+                <!-- Icon Block -->
+                <div class="media g-mb-30">
+                    <div class="d-flex mr-3">
+                <span class="u-icon-v1 u-icon-size--lg g-color-text">
+                  <i class="icon-communication-180 u-line-icon-pro"></i>
+                </span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="h5">Организуй</h3>
+                        <p>Добавь в свой список мониторинга каналы, которые необходимо отслеживать</p>
+                    </div>
+                </div>
+                <!-- End Icon Block -->
+
+                <!-- Icon Block -->
+                <div class="media g-mb-30">
+                    <div class="d-flex mr-3">
+                <span class="u-icon-v1 u-icon-size--lg g-color-text">
+                  <i class="icon-electronics-001 u-line-icon-pro"></i>
+                </span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="h5">Мониторь</h3>
+                        <p>Отслеживай посты в каналах на которые подписан</p>
+                    </div>
+                </div>
+                <!-- End Icon Block -->
+
+                <!-- Icon Block -->
+                <div class="media">
+                    <div class="d-flex mr-3">
+                <span class="u-icon-v1 u-icon-size--lg g-color-text">
+                  <i class="icon-science-008 u-line-icon-pro"></i>
+                </span>
+                    </div>
+                    <div class="media-body">
+                        <h3 class="h5">Аналитика</h3>
+                        <p>Просматривай анализ статистических данных</p>
+                    </div>
+                </div>
+                <!-- End Icon Block -->
+            </div>
         </div>
-    </form>
-</div>
+    </div>
+    <!-- Login -->
+
+</main>
+
+<!-- JS Global Compulsory -->
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery-migrate/jquery-migrate.min.js}"></script>
+<script th:src="@{/assets/vendor/popper.js/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/bootstrap.min.js}"></script>
+
+<!-- JS Implementing Plugins -->
+<script th:src="@{/assets/vendor/appear.js}"></script>
+<script th:src="@{/assets/vendor/slick-carousel/slick/slick.js}"></script>
+<script th:src="@{/assets/vendor/cubeportfolio-full/cubeportfolio/js/jquery.cubeportfolio.min.js}"></script>
+<script  th:src="@{/assets/vendor/jquery.maskedinput/src/jquery.maskedinput.js}"></script>
+
+<!-- JS Unify -->
+<script th:src="@{/assets/js/hs.core.js}"></script>
+<script th:src="@{/assets/js/components/hs.header.js}"></script>
+<script th:src="@{/assets/js/helpers/hs.hamburgers.js}"></script>
+<script th:src="@{/assets/js/components/hs.scroll-nav.js}"></script>
+<script th:src="@{/assets/js/components/hs.rating.js}"></script>
+<script th:src="@{/assets/js/components/hs.carousel.js}"></script>
+<script th:src="@{/assets/js/components/hs.cubeportfolio.js}"></script>
+<script th:src="@{/assets/js/components/hs.go-to.js}"></script>
+<script th:src="@{/assets/js/components/hs.masked-input.js}"></script>
+
+<!-- JS Customization -->
+<script src="/assets/js/custom.js"></script>
+
+<!-- JS Plugins Init. -->
+<script>
+
+    $(document).on('ready', function () {
+        // initialization of carousel
+        $.HSCore.components.HSCarousel.init('.js-carousel');
+
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#js-header'));
+        $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+        // initialization of rating
+        $.HSCore.components.HSRating.init($('.js-rating'), {
+            spacing: 2
+        });
+
+        // initialization of go to section
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        // initialization of forms
+        $.HSCore.components.HSMaskedInput.init('[data-mask]');
+    });
+
+    $(window).on('load', function () {
+        // initialization of HSScrollNav
+        $.HSCore.components.HSScrollNav.init($('#js-scroll-nav'), {
+            duration: 700
+        });
+
+        // initialization of cubeportfolio
+        $.HSCore.components.HSCubeportfolio.init('.cbp');
+    });
+</script>
 </body>
 </html>

@@ -2,8 +2,35 @@ body {
   width: 100%;
   height: 100%;
   background-color: beige;
+  scrollbar-face-color: #4d525e;
+  scrollbar-track-color: #97a3af;
 }
 .container {
   max-width: 720px;
   margin-top: 10%;
+}
+
+body::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+body::-webkit-scrollbar-thumb {
+  background: #845ec2;
+}
+body::-webkit-scrollbar-track {
+  background: #764cbb;
+}
+.custom-area::-webkit-scrollbar {
+  width: 0.5em;
+  height: 0.5em;
+}
+.custom-area::-webkit-scrollbar-thumb {
+  background: #764cbb;
+}
+.custom-area::-webkit-scrollbar-track {
+  background: #845ec2;
+}
+.custom-area {
+  scrollbar-face-color: #845ec2;
+  scrollbar-track-color: #764cbb;
 }

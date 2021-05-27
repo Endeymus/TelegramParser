@@ -1,10 +1,8 @@
 package com.endeymus.parser.controller;
 
-import com.endeymus.parser.entity.Channel;
-import com.endeymus.parser.entity.Posts;
-import com.endeymus.parser.entity.User;
+import com.endeymus.parser.entity.*;
 import com.endeymus.parser.model.ChannelPostInfo;
-import com.endeymus.parser.model.telegram.tdlib.Example;
+import com.endeymus.parser.model.TelegramAPI;
 import com.endeymus.parser.service.ChannelService;
 import com.endeymus.parser.service.MonitoringService;
 import com.endeymus.parser.service.PostsService;
@@ -17,9 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.HashMap;
+import java.security.Principal;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -38,28 +35,56 @@ public class AnalyticController {
     @Autowired
     private MonitoringService monitoringService;
 
-    @Autowired
-    private Example tgClient;
-
 
     @GetMapping("/")
-    public String analyze(Model model){
+    public String listMonitoring(Model model, Principal principal){
         // TODO: 08.05.2021 Добавить идентификатор пользователя в поиск через Security
-        User user = userService.findOne(1L);
-        List<Channel> channels = user
-                .getMonitoringList()
-                .stream()
-                .map(x->channelService.findOne(x.getIdChannel().getId()))
-                .collect(Collectors.toUnmodifiableList());
+        User user = userService.findByLogin(principal.getName());
 
         List<ChannelPostInfo> channels1 = user
                 .getMonitoringList()
                 .stream()
                 .map(x->channelService.findOne(x.getIdChannel().getId()))
-                .map(channel -> new ChannelPostInfo(channel, postsService.findLastPosts(channel.getIdInternal())))
+                .map(channel -> {
+                    Posts lastPosts = postsService.findLastPosts(channel.getIdInternal());
+                    if (lastPosts == null) {
+                        lastPosts = new Posts();
+                        lastPosts.setCountViews(0);
+                        lastPosts.setCountForward(0);
+                    }
+                    MonitoringSettings monitoringSettings = monitoringService.findByUserAndChannel(channel.getId(), user.getId()).getSettings();
+                    return new ChannelPostInfo(channel,
+                            lastPosts,
+                            monitoringSettings);
+                })
                 .collect(Collectors.toUnmodifiableList());
-        model.addAttribute("channels", channels);
+        model.addAttribute("channels", channels1);
         return "user/analytic";
+    }
+
+    @GetMapping("change/{id}")
+    public String analyze(@PathVariable String id){
+        Monitoring monitoring = monitoringService.findOne(Long.parseLong(id));
+        MonitoringSettings settings = monitoring.getSettings();
+        settings.setNeedAnalytic(!settings.isNeedAnalytic());
+        monitoring.setSettings(settings);
+        monitoringService.save(monitoring);
+        return "redirect:../";
+    }
+    @GetMapping("info/{id}")
+    public String info(@PathVariable String id, Model model){
+        Channel channel = channelService.findOne(Long.parseLong(id));
+
+        List<Posts> topPosts = postsService.findLastTopPosts(channel.getIdInternal());
+        topPosts.forEach(posts -> posts.setShortContent(String.format("%.250s ...", posts.getContent())));
+        Integer views = topPosts.stream().map(Posts::getCountViews).reduce(0, Integer::sum);
+        Integer forwards = topPosts.stream().map(Posts::getCountForward).reduce(0, Integer::sum);
+
+        model.addAttribute("posts", topPosts);
+        model.addAttribute("channel", channel);
+        model.addAttribute("views", views);
+        model.addAttribute("forwards", forwards);
+        return "user/info";
     }
 
     @ModelAttribute("title")

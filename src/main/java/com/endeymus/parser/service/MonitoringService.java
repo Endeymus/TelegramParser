@@ -13,4 +13,5 @@ public interface MonitoringService {
     Monitoring save(Monitoring monitoring);
     void delete(Monitoring monitoring);
     Monitoring findOne(Long id);
+    Monitoring findByUserAndChannel(Long idChannel, Long idUser);
 }

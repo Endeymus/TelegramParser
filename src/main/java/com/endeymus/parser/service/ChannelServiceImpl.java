@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -47,14 +48,29 @@ public class ChannelServiceImpl implements ChannelService {
     @Override
     @Transactional(readOnly = true)
     public Channel findOne(Long id) {
-        return channelRepository.getOne(id);
+        Channel result;
+        try {
+            result = em.createQuery("select c from Channel c where c.id = :id", Channel.class)
+                    .setParameter("id", id)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            result = null;
+        }
+        return result;
     }
 
     @Override
     @Transactional(readOnly = true)
     public Channel findByIdInternal(Long id) {
-        return em.createNamedQuery(Channel.FIND_BY_ID_INTERNAL, Channel.class)
-                .setParameter("id_internal", id)
-                .getSingleResult();
+        Channel channel;
+        try {
+            channel = em.createNamedQuery(Channel.FIND_BY_ID_INTERNAL, Channel.class)
+                    .setParameter("id_internal", id)
+                    .getSingleResult();
+
+        } catch (NoResultException e) {
+            channel = null;
+        }
+        return channel;
     }
 }

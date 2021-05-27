@@ -1,18 +1,84 @@
-<nav th:fragment="header" class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand ms-3" href="/">Deus-Parser</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<header id="js-header" class="u-header u-header--sticky-top u-header--toggle-section u-header--change-appearance" data-header-fix-moment="600" data-header-fix-effect="slide">
+    <div class="u-header__section g-transition-0_5 g-mt-0" data-header-fix-moment-exclude="g-mt-0" data-header-fix-moment-classes="g-mt-minus-73 g-mt-minus-76--md">
+        <!-- Topbar -->
+        <div class="g-bg-white">
+            <div class="container-fluid g-py-15">
+                <div class="row align-items-center">
+                    <div class="col-2 col-md-4 col-lg-2">
+                        <!-- Logo -->
+                        <a class="navbar-brand d-flex align-items-center g-color-main text-uppercase g-text-underline--none--hover" href="/">
+                            <span class="g-color-text g-font-size-35 g-line-height-0_7 g-opacity-0_4 mr-4"><i class="icon-electronics-018 u-line-icon-pro"></i></span>
+                            <span class="d-block g-hidden-sm-down g-font-weight-600 g-line-height-1_4">
+                    Deus-Parser
+                    <span class="d-block g-color-text g-font-size-10 text-center">Ваш выбор</span>
+                  </span>
+                        </a>
+                        <!-- End Logo -->
+                    </div>
 
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item my-auto">
-                <a class="nav-link" href="/monitoring/">Лист мониторинга</a>
-            </li>
-            <li class="nav-item my-auto">
-                <a class="nav-link" href="/analytic/">Сведения о каналах</a>
-            </li>
-        </ul>
+                    <div class="col-10 col-md-8 col-lg-6 ml-auto">
+                        <!-- List -->
+                        <ul class="list-inline float-right mb-0">
+                            <li sec:authorize="isAnonymous()" class="list-inline-item">
+                                <a class="u-link-v5 g-color-main g-color-white--hover g-bg-secondary g-bg-primary-dark-v1--hover g-font-weight-500 g-px-15 g-py-10" href="/registration">Регистрация</a>
+                            </li>
+                            <li sec:authorize="isAnonymous()" class="list-inline-item">
+                                <a class="u-link-v5 g-color-white g-bg-primary g-bg-primary-dark-v1--hover g-font-weight-500 g-px-15 g-py-10" href="/login">Войти</a>
+                            </li>
+                            <li sec:authorize="isAuthenticated()" class="list-inline-item">
+                                <a class="u-link-v5 g-color-white g-bg-primary g-bg-primary-dark-v1--hover g-font-weight-500 g-px-15 g-py-10" href="/logout">Выход</a>
+                            </li>
+                        </ul>
+                        <!-- End List -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Topbar -->
+
+        <nav class="js-mega-menu navbar navbar-expand-lg g-brd-y g-brd-2 g-brd-primary-dark-v1 g-bg-primary g-pa-0 hs-menu-initialized hs-menu-horizontal">
+            <div class="container-fluid">
+                <!-- Responsive Toggle Button -->
+                <button class="navbar-toggler navbar-toggler-right btn g-line-height-1 g-brd-none g-pa-0" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="navBar" data-toggle="collapse" data-target="#navBar">
+              <span class="hamburger hamburger--slider g-px-0">
+                <span class="hamburger-box">
+                  <span class="hamburger-inner"></span>
+                </span>
+              </span>
+                </button>
+                <!-- End Responsive Toggle Button -->
+
+
+                <!-- Navigation -->
+                <div id="navBar" class="collapse navbar-collapse align-items-center order-lg-last g-brd-top g-brd-none--lg g-brd-primary-dark-v1">
+                    <ul class="navbar-nav g-py-30 g-py-0--lg">
+
+                        <li class="nav-item">
+                            <a class="nav-link g-color-white g-brd-x--lg g-brd-primary-dark-v1 g-bg-primary-dark-v1--hover g-font-weight-600 g-font-size-default g-px-17 g-px-23--xl g-py-15" href="/">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link g-color-white g-brd-x--lg g-brd-primary-dark-v1 g-bg-primary-dark-v1--hover g-font-weight-600 g-font-size-default g-px-17 g-px-23--xl g-py-15" href="/document/api">
+                                Документы
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link g-color-white g-brd-right--lg g-brd-primary-dark-v1 g-bg-primary-dark-v1--hover g-font-weight-600 g-font-size-default g-px-17 g-px-23--xl g-py-15" href="/monitoring/">
+                                Мониторинг
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link g-color-white g-brd-right--lg g-brd-primary-dark-v1 g-bg-primary-dark-v1--hover g-font-weight-600 g-font-size-default g-px-17 g-px-23--xl g-py-15" href="/analytic/">
+                                Каналы
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- End Navigation -->
+            </div>
+        </nav>
     </div>
-</nav>
+</header>

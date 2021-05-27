@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
@@ -55,5 +56,19 @@ public class MonitoringServiceImpl implements MonitoringService {
     @Transactional(readOnly = true)
     public Monitoring findOne(Long id) {
         return monitoringRepository.getOne(id);
+    }
+
+    @Override
+    public Monitoring findByUserAndChannel(Long id_channel, Long id_user) {
+        Monitoring result;
+        try {
+            result = em.createNamedQuery(Monitoring.SQL_FIND_BY_ID_USER_AND_ID_CHANNEL, Monitoring.class)
+                    .setParameter("id_user", id_user)
+                    .setParameter("id_channel", id_channel)
+                    .getSingleResult();
+        } catch (NoResultException e) {
+            result = null;
+        }
+        return result;
     }
 }

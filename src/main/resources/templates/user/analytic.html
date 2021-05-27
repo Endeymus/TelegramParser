@@ -1,20 +1,168 @@
 <!DOCTYPE html>
+<!--suppress HtmlUnknownAttribute -->
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="blocks/head :: head"></head>
+<head>
+    <!-- Title -->
+    <title th:text="${title}"></title>
+
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" th:href="@{/favicon.ico}">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans%3A400%2C300%2C500%2C600%2C700%7CPlayfair+Display%7CRoboto%7CRaleway%7CSpectral%7CRubik">
+    <!-- CSS Global Compulsory -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/bootstrap/bootstrap.min.css}">
+    <!-- CSS Global Icons -->
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-awesome/css/font-awesome.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-line/css/simple-line-icons.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-etlinefont/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-line-pro/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/icon-hs/style.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/animate.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/dzsparallaxer/dzsparallaxer.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/dzsparallaxer/dzsscroller/scroller.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/dzsparallaxer/advancedscroller/plugin.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/hs-megamenu/src/hs.megamenu.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/hamburgers/hamburgers.min.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/chosen/chosen.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/slick-carousel/slick/slick.css}">
+    <link rel="stylesheet" th:href="@{/assets/vendor/fancybox/jquery.fancybox.min.css}">
+
+    <!-- CSS Unify -->
+    <link rel="stylesheet" th:href="@{/assets/css/styles.multipage-real-estate.css}">
+    <!-- CSS Customization -->
+    <link rel="stylesheet" th:href="@{/assets/css/custom.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-mousewheel/3.1.13/jquery.mousewheel.min.js"></script><style></style>
+</head>
 <body>
-<nav th:replace="blocks/header :: header"></nav>
-<div class="row row-cols-1 row-cols-md-4 g-4 mt-5 px-3">
-    <div th:each="channel: ${channels}" class="col">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 th:text="${channel.getName()}" class="card-title"></h5>
-                <h6 th:text="${channel.getIdInternal()}"  class="card-subtitle mb-2 text-muted"></h6>
-                <p th:text="${channel.getDescription()}" class="card-text"></p>
-                <a href="#" class="card-link">Подробно</a>
-                <a href="#" class="card-link">Не анализировать</a>
+<main>
+    <!--  Start Header  -->
+    <header th:replace="blocks/header"></header>
+    <!--  End Header  -->
+    <section class="g-pt-50 g-pb-90">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 g-mb-30" th:each="channel : ${channels}">
+                    <!-- Search Result -->
+                    <article class="g-pa-25 u-shadow-v11 rounded">
+                        <h2 class="h4 g-mb-15">
+                            <a th:text="${channel.getChannel().getName()}" class="u-link-v5 g-color-gray-dark-v1 g-color-primary--hover" href="#"></a>
+                        </h2>
+
+                        <!-- Search Info -->
+                        <ul class="list-inline d-flex justify-content-between g-mb-20">
+                            <li class="list-inline-item">
+                                <i class="icon-eye g-pos-rel g-top-1 g-color-gray-dark-v5 g-mr-5"></i>
+                                <i th:utext="${channel.getLastPost().getCountViews()}"></i>
+                            </li>
+                            <li class="list-inline-item">
+                                <i class="icon-communication-022 g-pos-rel g-top-1 g-mr-5"></i>
+                                <i th:utext="${channel.getLastPost().getCountForward()}"></i>
+                            </li>
+                        </ul>
+                        <!-- End Search Info -->
+
+                        <p th:text="${channel.getChannel().getDescription()}" class="g-mb-15"></p>
+                        <p class="g-mb-15">Период обхода канала: 5 минут</p>
+
+
+                        <!-- Share, Print and More -->
+                        <ul class="list-inline mb-0">
+                            <li class="list-inline-item g-mr-20" wfd-id="233">
+                                <a class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" th:href="@{info/{id}(id=${channel.getSettings().getIdMonitoring().getId()})}">
+                                    <i class="icon-question g-pos-rel g-top-1 g-mr-5"></i> Подробно
+                                </a>
+                            </li>
+                            <li class="list-inline-item g-mr-20">
+                                <a th:if="${channel.getSettings().isNeedAnalytic()}" class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" th:href="@{change/{id}(id=${channel.getSettings().getIdMonitoring().getId()})}">
+                                    <i class="icon-minus g-pos-rel g-top-1 g-mr-5"></i> Выключить
+                                </a>
+                                <a th:if="${not channel.getSettings().isNeedAnalytic()}" class="u-link-v5 g-color-gray-dark-v5 g-color-primary--hover" th:href="@{change/{id}(id=${channel.getSettings().getIdMonitoring().getId()})}">
+                                    <i class="icon-plus g-pos-rel g-top-1 g-mr-5"></i> Включить
+                                </a>
+                            </li>
+
+                        </ul>
+                        <!-- End Share, Print and More -->
+                    </article>
+                    <!-- End Search Result -->
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- Footer -->
+    <!-- Footer -->
+</main>
+
+<script type="text/javascript" src="../../static/js/monitoring.js" th:src="@{/js/monitoring.js}"></script>
+
+<!-- JS Global Compulsory -->
+<script th:src="@{/assets/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/assets/vendor/jquery-migrate/jquery-migrate.min.js}"></script>
+<script th:src="@{/assets/vendor/popper.js/popper.min.js}"></script>
+<script th:src="@{/assets/vendor/bootstrap/bootstrap.min.js}"></script>
+
+<!-- JS Implementing Plugins -->
+<script th:src="@{/assets/vendor/appear.js}"></script>
+<script th:src="@{/assets/vendor/slick-carousel/slick/slick.js}"></script>
+<script th:src="@{/assets/vendor/cubeportfolio-full/cubeportfolio/js/jquery.cubeportfolio.min.js}"></script>
+<script  th:src="@{/assets/vendor/jquery.maskedinput/src/jquery.maskedinput.js}"></script>
+
+<!-- JS Unify -->
+<script th:src="@{/assets/js/hs.core.js}"></script>
+<script th:src="@{/assets/js/components/hs.scroll-nav.js}"></script>
+<script th:src="@{/assets/js/components/hs.rating.js}"></script>
+<script th:src="@{/assets/js/components/hs.cubeportfolio.js}"></script>
+<script th:src="@{/assets/js/components/hs.masked-input.js}"></script>
+<script th:src="@{/assets/js/components/hs.header.js}"></script>
+<script th:src="@{/assets/js/helpers/hs.hamburgers.js}"></script>
+<script th:src="@{/assets/js/components/hs.dropdown.js}"></script>
+<script th:src="@{/assets/js/components/hs.slider.js}"></script>
+<script th:src="@{/assets/js/components/hs.select.js}"></script>
+<script th:src="@{/assets/js/components/hs.carousel.js}"></script>
+<script th:src="@{/assets/js/components/hs.popup.js}"></script>
+<script th:src="@{/assets/js/components/hs.go-to.js}"></script>
+
+<!-- JS Customization -->
+<script src="/assets/js/custom.js"></script>
+
+<!-- JS Plugins Init. -->
+<script>
+
+    $(document).on('ready', function () {
+        // initialization of carousel
+        $.HSCore.components.HSCarousel.init('.js-carousel');
+
+        // initialization of header
+        $.HSCore.components.HSHeader.init($('#js-header'));
+        $.HSCore.helpers.HSHamburgers.init('.hamburger');
+
+        // initialization of rating
+        $.HSCore.components.HSRating.init($('.js-rating'), {
+            spacing: 2
+        });
+
+        // initialization of go to section
+        $.HSCore.components.HSGoTo.init('.js-go-to');
+
+        // initialization of forms
+        $.HSCore.components.HSMaskedInput.init('[data-mask]');
+    });
+
+    $(window).on('load', function () {
+        // initialization of HSScrollNav
+        $.HSCore.components.HSScrollNav.init($('#js-scroll-nav'), {
+            duration: 700
+        });
+
+        // initialization of cubeportfolio
+        $.HSCore.components.HSCubeportfolio.init('.cbp');
+    });
+</script>
 </body>
 </html>

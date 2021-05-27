@@ -1,6 +1,7 @@
 package com.endeymus.parser.model;
 
 import com.endeymus.parser.entity.Channel;
+import com.endeymus.parser.entity.MonitoringSettings;
 import com.endeymus.parser.entity.Posts;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +15,5 @@ import lombok.Data;
 public class ChannelPostInfo {
     private Channel channel;
     private Posts lastPost;
+    private MonitoringSettings settings;
 }

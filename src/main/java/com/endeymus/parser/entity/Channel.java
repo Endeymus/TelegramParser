@@ -1,5 +1,6 @@
 package com.endeymus.parser.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,6 +24,7 @@ import java.util.List;
 public class Channel {
     public static final String FIND_BY_ID_INTERNAL = "Channel.findByIdInternal";
 
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -34,13 +36,16 @@ public class Channel {
     @Column(name = "description")
     private String description;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "id_parent_channel")
     private Channel idParentChannel;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idChannel", fetch = FetchType.EAGER)
     private List<Monitoring> monitoringList;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "client_channel",
             joinColumns = @JoinColumn(name = "id_channel"),
@@ -48,9 +53,11 @@ public class Channel {
     )
     private List<Client> clients;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idChannel")
     private List<Posts> posts;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "idParentChannel")
     private List<Channel> children;
 
